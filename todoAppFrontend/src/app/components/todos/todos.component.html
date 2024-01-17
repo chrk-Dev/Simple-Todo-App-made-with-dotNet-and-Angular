@@ -1,0 +1,42 @@
+<div class="container p-4">
+    <form #form="ngForm" (ngSubmit)="addTodo()" class="row align-items-center ">
+        <div class="col-auto text-nowrap">Add Todo:</div>
+        <div class="col-md-3 add-todo-section">
+            <label for="description"></label>
+            <input required type="text" class="form-control" placeholder="type your todo here" id="description"
+                name="description" [ngModelOptions]="{standalone: true}" [(ngModel)]="newTodo.description">
+        </div>
+        <div class="col-auto"><button required type="submit" class="btn btn-outline-success">ADD +</button></div>
+    </form>
+</div>
+
+
+
+<table class="table" *ngIf="todos && todos.length > 0">
+    <thead>
+        <tr class="table-success table-bordered">
+            <th scope="col">Description</th>
+            <th scope="col">Created Date</th>
+            <th scope="col">Created Time</th>
+            <th scope="col">Completed</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todo of todos" class="{{todo.iscompleted ? 'table-danger' : 'table-primary' }}">
+            <td>{{todo.description}}</td>
+            <td>{{todo.createdDate | date:'MM/dd/yyy'}}</td>
+            <td>{{todo.createdDate | date:'hh:mm a'}}</td>
+            <td><input type="checkbox" [checked]="todo.iscompleted" (change)="onCompletedChange(todo.id,todo)"></td>
+            <td><button
+                (click)="deleteTodo(todo.id)"
+                type="button" class="btn btn-outline-danger">
+                    Remove
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"></path>
+                      </svg>
+                </button></td>
+
+        </tr>
+    </tbody>
+</table>
