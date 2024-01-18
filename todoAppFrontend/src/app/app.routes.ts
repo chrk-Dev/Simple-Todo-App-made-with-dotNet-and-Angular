@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 export const routes: Routes = [
   
     {
-        path:'todos',
+        path:'',
         component:TodosComponent
     }
 ];
